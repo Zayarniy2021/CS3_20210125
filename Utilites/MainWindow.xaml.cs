@@ -24,5 +24,19 @@ namespace Utilites
         {
             InitializeComponent();
         }
+
+        private void BtnSend_Click(object sender, RoutedEventArgs e)
+        {
+            Task.Run(
+            () =>
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    System.Threading.Thread.Sleep(2000);
+                    System.Diagnostics.Debug.WriteLine("Письмо отправлено!");
+                }
+            }
+            );
+        }
     }
 }

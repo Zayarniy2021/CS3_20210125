@@ -6,7 +6,64 @@
         xmlns:local="clr-namespace:Utilites"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="39*"/>
+            <RowDefinition Height="281*"/>
+            <RowDefinition Height="39*"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="Файл"/>
+            <MenuItem Header="Помощь"/>
+        </Menu>
+        <TabControl Grid.Row="1" x:Name="tabControl" TabStripPlacement="Right">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <StackPanel.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                              <Image Source="/Images/groups.ico" Width="20" HorizontalAlignment="Left"/>
+                              <TextBlock>Формирование группы рассылки</TextBlock>
+                            </StackPanel>
+                        </StackPanel.ToolTip>
+                        <Image Source="/Images/groups.ico" Width="20" HorizontalAlignment="Left"/>
+                        <TextBlock>Группы</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                
+            </TabItem>
+            <TabItem x:Name="tabInstant" IsSelected="True">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <Image Source="/Images/outbox1.png" Width="20" HorizontalAlignment="Left"/>
+                        <TextBlock Margin="3">Письмо</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+
+                <StackPanel>
+                    <Label Content="Название письма:" Width="auto"/>
+                    <TextBox Grid.Row="1" Text="{Binding Subject}"  x:Name="tbSubject" Width="200" HorizontalAlignment="Left"/>
+                    <Label Content="Содержимое письма:" Width="auto"/> 
+                    <TextBox Grid.Row="1"  x:Name="tbBody" Text="{Binding Body}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="100" AcceptsReturn="True" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
+                    <Label Content="From"/>
+                    <ComboBox x:Name="cbFrom" ItemsSource="{Binding FromList}" Text="{Binding From}">
+                        <ComboBoxItem>ivanov@mail.com</ComboBoxItem>
+                        <ComboBoxItem>ivanov2@mail.com</ComboBoxItem>
+                    </ComboBox>
+                    <Label Content="To"/>
+                    <ComboBox x:Name="cbTo" ItemsSource="{Binding ToList}" Text="{Binding To}">
+                        <ComboBoxItem>ivanov@mail.com</ComboBoxItem>
+                        <ComboBoxItem>ivanov2@mail.com</ComboBoxItem>
+                    </ComboBox>
+                    <Button   x:Name="btnSend" Width="auto" FontWeight="Medium" Content="Отправить немедленно" Click="BtnSend_Click"/>
+                    <Button   x:Name="btnAddNewMail" Width="auto" FontWeight="Medium" Content="Добавить в планировщик" Command="{Binding AddNewMail}"/>
+                </StackPanel>
+
+            </TabItem>
+
+            <TabItem Header="3">
+
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

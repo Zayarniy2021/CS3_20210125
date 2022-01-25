@@ -67,6 +67,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Theme\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -93,6 +97,26 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\2groups.ico" />
+    <Resource Include="Images\Bookmark-Folder.ico" />
+    <Resource Include="Images\cache.png" />
+    <Resource Include="Images\clock.png" />
+    <Resource Include="Images\groups.ico" />
+    <Resource Include="Images\library.ico" />
+    <Resource Include="Images\mailreminder.png" />
+    <Resource Include="Images\Mail_64x.png" />
+    <Resource Include="Images\Mimetypes-application-vnd-oasis-opendocument-text.ico" />
+    <Resource Include="Images\Move Next %28Arrow%29 Green64.png" />
+    <Resource Include="Images\Move Previous %28Arrow%29 Green64.png" />
+    <Resource Include="Images\New Add64.png" />
+    <Resource Include="Images\New Edit64.png" />
+    <Resource Include="Images\New Remove64.png" />
+    <Resource Include="Images\outbox1.png" />
+    <Resource Include="Images\schedule.ico" />
+    <Resource Include="Images\settings.ico" />
+    <Resource Include="Images\stat.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
