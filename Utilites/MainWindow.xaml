@@ -3,10 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lib="clr-namespace:UserConrols;assembly=UserConrols"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:Utilites"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid ShowGridLines="True">
+        Title="MainWindow" Height="450" Width="800" >
+    <Grid ShowGridLines="True" lib:FileInputBox.FileNameChanged="FileInputBox_OnFileNameChanged">
         <Grid.RowDefinitions>
             <RowDefinition Height="39*"/>
             <RowDefinition Height="281*"/>
@@ -16,17 +18,18 @@
             <MenuItem Header="Файл"/>
             <MenuItem Header="Помощь"/>
         </Menu>
-        <TabControl Grid.Row="1" x:Name="tabControl" TabStripPlacement="Right">
+        <TabControl Grid.Row="1" x:Name="tabControl" TabStripPlacement="Right" SelectedIndex="1">
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                         <StackPanel.ToolTip>
                             <StackPanel Orientation="Horizontal">
-                              <Image Source="/Images/groups.ico" Width="20" HorizontalAlignment="Left"/>
+                              <!--<Image Source="/Images/groups.ico" Width="20" HorizontalAlignment="Left"/>-->
                               <TextBlock>Формирование группы рассылки</TextBlock>
                             </StackPanel>
                         </StackPanel.ToolTip>
-                        <Image Source="/Images/groups.ico" Width="20" HorizontalAlignment="Left"/>
+                        <!--<Image Source="/Images/groups.ico" Width="20" HorizontalAlignment="Left"/>-->
+                        <fa:ImageAwesome Icon="Group" Height="13" Margin="2" Foreground="red"></fa:ImageAwesome>
                         <TextBlock>Группы</TextBlock>
                     </StackPanel>
                 </TabItem.Header>
@@ -41,8 +44,12 @@
                 </TabItem.Header>
 
                 <StackPanel>
+                    <StackPanel Orientation="Horizontal">
                     <Label Content="Название письма:" Width="auto"/>
                     <TextBox Grid.Row="1" Text="{Binding Subject}"  x:Name="tbSubject" Width="200" HorizontalAlignment="Left"/>
+                    <Label Content="Прикрепить" Width="auto"/>
+                        <lib:FileInputBox Width="200" HorizontalAlignment="Left"></lib:FileInputBox>
+                    </StackPanel>
                     <Label Content="Содержимое письма:" Width="auto"/> 
                     <TextBox Grid.Row="1"  x:Name="tbBody" Text="{Binding Body}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="100" AcceptsReturn="True" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
                     <Label Content="From"/>

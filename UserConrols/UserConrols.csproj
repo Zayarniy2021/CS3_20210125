@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6942CA8D-E3DB-4EF7-A35C-5D4EC92268D4}</ProjectGuid>
+    <ProjectGuid>{30024BF4-56DC-4091-AF22-1F40A078DB80}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Utilites</RootNamespace>
-    <AssemblyName>Utilites</AssemblyName>
+    <RootNamespace>UserConrols</RootNamespace>
+    <AssemblyName>UserConrols</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,9 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
-      <HintPath>..\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -59,6 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="FileInputBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,14 +67,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FileInputBox.xaml.cs">
+      <DependentUpon>FileInputBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Theme\Theme.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -94,7 +93,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -102,32 +100,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\2groups.ico" />
-    <Resource Include="Images\Bookmark-Folder.ico" />
-    <Resource Include="Images\cache.png" />
-    <Resource Include="Images\clock.png" />
-    <Resource Include="Images\groups.ico" />
-    <Resource Include="Images\library.ico" />
-    <Resource Include="Images\mailreminder.png" />
-    <Resource Include="Images\Mail_64x.png" />
-    <Resource Include="Images\Mimetypes-application-vnd-oasis-opendocument-text.ico" />
-    <Resource Include="Images\Move Next %28Arrow%29 Green64.png" />
-    <Resource Include="Images\Move Previous %28Arrow%29 Green64.png" />
-    <Resource Include="Images\New Add64.png" />
-    <Resource Include="Images\New Edit64.png" />
-    <Resource Include="Images\New Remove64.png" />
-    <Resource Include="Images\outbox1.png" />
-    <Resource Include="Images\schedule.ico" />
-    <Resource Include="Images\settings.ico" />
-    <Resource Include="Images\stat.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\UserConrols\UserConrols.csproj">
-      <Project>{30024bf4-56dc-4091-af22-1f40a078db80}</Project>
-      <Name>UserConrols</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

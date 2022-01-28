@@ -38,5 +38,16 @@ namespace Utilites
             }
             );
         }
+
+        //private void FileInputBox_OnFileNameChanged(object sender, EventArgs e)
+        //{
+        //    //System.Diagnostics.Debug.WriteLine("File changed!");
+
+        //}
+
+        private void FileInputBox_OnFileNameChanged(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("File changed! In Grid");
+        }
     }
 }
