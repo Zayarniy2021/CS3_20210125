@@ -8,6 +8,9 @@
         xmlns:local="clr-namespace:Utilites"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" >
+    <Window.CommandBindings>
+        <CommandBinding Command="Help"  CanExecute="CanSendMail" Executed="SendMail" />
+    </Window.CommandBindings>
     <Grid ShowGridLines="True" lib:FileInputBox.FileNameChanged="FileInputBox_OnFileNameChanged">
         <Grid.RowDefinitions>
             <RowDefinition Height="39*"/>
@@ -62,7 +65,8 @@
                         <ComboBoxItem>ivanov@mail.com</ComboBoxItem>
                         <ComboBoxItem>ivanov2@mail.com</ComboBoxItem>
                     </ComboBox>
-                    <Button   x:Name="btnSend" Width="auto" FontWeight="Medium" Content="Отправить немедленно" Click="BtnSend_Click"/>
+                    <!--<Button   x:Name="btnSend" Width="auto" FontWeight="Medium" Content="Отправить немедленно" Click="BtnSend_Click"/>-->
+                    <Button   Command="Help" x:Name="btnSend" Width="auto" FontWeight="Medium" Content="Отправить немедленно"/>
                     <Button   x:Name="btnAddNewMail" Width="auto" FontWeight="Medium" Content="Добавить в планировщик" Command="{Binding AddNewMail}"/>
                 </StackPanel>
 

@@ -25,7 +25,7 @@ namespace Utilites
             InitializeComponent();
         }
 
-        private void BtnSend_Click(object sender, RoutedEventArgs e)
+        private void SendMail(object sender, ExecutedRoutedEventArgs e)
         {
             Task.Run(
             () =>
@@ -37,6 +37,13 @@ namespace Utilites
                 }
             }
             );
+        }
+
+
+        void CanSendMail(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (cbFrom.SelectedItem == null || cbTo.SelectedItem == null) e.CanExecute = false;
+            else e.CanExecute = true;
         }
 
         //private void FileInputBox_OnFileNameChanged(object sender, EventArgs e)
