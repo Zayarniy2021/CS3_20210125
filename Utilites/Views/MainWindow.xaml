@@ -5,12 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:lib="clr-namespace:UserConrols;assembly=UserConrols"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:viewmodel="clr-namespace:Utilites.ViewModels"
         xmlns:local="clr-namespace:Utilites"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" >
+        Title="{Binding Title}" Height="450" Width="800" >
+    <Window.DataContext>
+        <viewmodel:MainViewModel/>
+    </Window.DataContext>
+    <!--
     <Window.CommandBindings>
         <CommandBinding Command="Help"  CanExecute="CanSendMail" Executed="SendMail" />
     </Window.CommandBindings>
+    -->
+    <Window.InputBindings>
+        <KeyBinding Key="Q" Modifiers="Control" Command="{Binding CloseWindowCommand}"/>
+    </Window.InputBindings>
+
     <Grid ShowGridLines="True" lib:FileInputBox.FileNameChanged="FileInputBox_OnFileNameChanged">
         <Grid.RowDefinitions>
             <RowDefinition Height="39*"/>
@@ -39,7 +49,12 @@
                 
             </TabItem>
             <TabItem x:Name="tabInstant" IsSelected="True">
+                <TabItem.InputBindings>
+                    <KeyBinding Key="Q" Modifiers="Control" Command="{Binding CloseWindowCommand}"/>
+                    <MouseBinding Command="{Binding MailSendCommand}" MouseAction="LeftDoubleClick"/>
+                </TabItem.InputBindings>
                 <TabItem.Header>
+
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                         <Image Source="/Images/outbox1.png" Width="20" HorizontalAlignment="Left"/>
                         <TextBlock Margin="3">Письмо</TextBlock>
@@ -56,7 +71,7 @@
                     <Label Content="Содержимое письма:" Width="auto"/> 
                     <TextBox Grid.Row="1"  x:Name="tbBody" Text="{Binding Body}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="100" AcceptsReturn="True" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
                     <Label Content="From"/>
-                    <ComboBox x:Name="cbFrom" ItemsSource="{Binding FromList}" Text="{Binding From}">
+                    <ComboBox x:Name="cbFrom" ItemsSource="{Binding FromList}" Text="{Binding From}" SelectedItem="{Binding FromSelectedItem}">
                         <ComboBoxItem>ivanov@mail.com</ComboBoxItem>
                         <ComboBoxItem>ivanov2@mail.com</ComboBoxItem>
                     </ComboBox>
@@ -66,7 +81,7 @@
                         <ComboBoxItem>ivanov2@mail.com</ComboBoxItem>
                     </ComboBox>
                     <!--<Button   x:Name="btnSend" Width="auto" FontWeight="Medium" Content="Отправить немедленно" Click="BtnSend_Click"/>-->
-                    <Button   Command="Help" x:Name="btnSend" Width="auto" FontWeight="Medium" Content="Отправить немедленно"/>
+                    <Button   Command="{Binding MailSendCommand}" x:Name="btnSend" Width="auto" FontWeight="Medium" Content="Отправить немедленно"/>
                     <Button   x:Name="btnAddNewMail" Width="auto" FontWeight="Medium" Content="Добавить в планировщик" Command="{Binding AddNewMail}"/>
                 </StackPanel>
 

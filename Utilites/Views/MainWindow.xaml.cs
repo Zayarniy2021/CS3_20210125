@@ -25,32 +25,7 @@ namespace Utilites
             InitializeComponent();
         }
 
-        private void SendMail(object sender, ExecutedRoutedEventArgs e)
-        {
-            Task.Run(
-            () =>
-            {
-                for (int i = 0; i < 10; i++)
-                {
-                    System.Threading.Thread.Sleep(2000);
-                    System.Diagnostics.Debug.WriteLine("Письмо отправлено!");
-                }
-            }
-            );
-        }
 
-
-        void CanSendMail(object sender, CanExecuteRoutedEventArgs e)
-        {
-            if (cbFrom.SelectedItem == null || cbTo.SelectedItem == null) e.CanExecute = false;
-            else e.CanExecute = true;
-        }
-
-        //private void FileInputBox_OnFileNameChanged(object sender, EventArgs e)
-        //{
-        //    //System.Diagnostics.Debug.WriteLine("File changed!");
-
-        //}
 
         private void FileInputBox_OnFileNameChanged(object sender, RoutedEventArgs e)
         {
