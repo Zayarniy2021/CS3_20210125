@@ -31,5 +31,20 @@ namespace Utilites
         {
             System.Diagnostics.Debug.WriteLine("File changed! In Grid");
         }
+
+        private void Group_Error(object sender, ValidationErrorEventArgs e)
+        {
+            if (e.Action == ValidationErrorEventAction.Added)
+            {
+
+                Console.WriteLine(sender);
+                ((Control)sender).ToolTip = e.Error.ErrorContent.ToString();
+            }//если ValidationErrorEventAction.Removed
+            else
+            {
+                Console.WriteLine("Отключили событие");
+                ((Control)sender).ToolTip = null;
+            }
+        }
     }
 }

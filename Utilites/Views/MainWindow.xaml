@@ -6,9 +6,20 @@
         xmlns:lib="clr-namespace:UserConrols;assembly=UserConrols"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:viewmodel="clr-namespace:Utilites.ViewModels"
+        xmlns:validationrules="clr-namespace:Utilites.ValidationRules"
         xmlns:local="clr-namespace:Utilites"
         mc:Ignorable="d"
         Title="{Binding Title}" Height="450" Width="800" >
+<Window.Resources>
+    <ControlTemplate x:Key="TextBoxErrorTemplate">
+        <StackPanel Orientation="Horizontal">
+            <Border BorderBrush="Aqua" BorderThickness="6">
+                <AdornedElementPlaceholder/>
+            </Border>
+            <TextBlock Foreground="Aqua" FontWeight="Bold">!</TextBlock>
+        </StackPanel>
+    </ControlTemplate>
+    </Window.Resources>
     <Window.DataContext>
         <viewmodel:MainViewModel/>
     </Window.DataContext>
@@ -46,7 +57,18 @@
                         <TextBlock>Группы</TextBlock>
                     </StackPanel>
                 </TabItem.Header>
-                
+                <DockPanel>
+                    <TextBlock>Группы</TextBlock>
+                    <TextBox x:Name="tbGroup" Validation.Error="Group_Error" Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}">
+                        <TextBox.Text>
+                            <Binding Path="Group" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"   NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </DockPanel>
             </TabItem>
             <TabItem x:Name="tabInstant" IsSelected="True">
                 <TabItem.InputBindings>
@@ -71,12 +93,25 @@
                     <Label Content="Содержимое письма:" Width="auto"/> 
                     <TextBox Grid.Row="1"  x:Name="tbBody" Text="{Binding Body}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="100" AcceptsReturn="True" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
                     <Label Content="From"/>
-                    <ComboBox x:Name="cbFrom" ItemsSource="{Binding FromList}" Text="{Binding From}" SelectedItem="{Binding FromSelectedItem}">
+                    <ComboBox x:Name="cbFrom" ItemsSource="{Binding FromList}" IsReadOnly="False" IsEditable="True" SelectedItem="{Binding FromSelectedItem}" Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}">
+                        <ComboBox.Text>
+
+                            <Binding Path="From" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validationrules:EMailValidationRules/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </ComboBox.Text>
                         <ComboBoxItem>ivanov@mail.com</ComboBoxItem>
                         <ComboBoxItem>ivanov2@mail.com</ComboBoxItem>
                     </ComboBox>
                     <Label Content="To"/>
-                    <ComboBox x:Name="cbTo" ItemsSource="{Binding ToList}" Text="{Binding To}">
+                    <ComboBox x:Name="cbTo" ItemsSource="{Binding ToList}" IsReadOnly="False" IsEditable="True">
+                        <ComboBox.Text>
+                            <Binding Path="To" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnExceptions="False" >
+                            </Binding>
+                        </ComboBox.Text>
+
                         <ComboBoxItem>ivanov@mail.com</ComboBoxItem>
                         <ComboBoxItem>ivanov2@mail.com</ComboBoxItem>
                     </ComboBox>

@@ -70,6 +70,7 @@
     <Compile Include="Commands\Base\Command.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="ValidationRules\ValidationRules.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">

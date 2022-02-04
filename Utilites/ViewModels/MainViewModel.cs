@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ using Utilites.ViewModels.Base;
 
 namespace Utilites.ViewModels
 {
-    class MainViewModel: ViewModel
+    class MainViewModel: ViewModel, IDataErrorInfo
     {
 
         public MainViewModel()
@@ -43,6 +44,44 @@ namespace Utilites.ViewModels
             set
             {
                 Set(ref _Title, value);
+            }
+        }
+
+        private string _From = "mail@yandex.ru";
+
+        public string From
+        {
+            get => _From;
+
+            set
+            {
+                Set(ref _From, value);
+            }
+        }
+
+        private string _To = "mail2@yandex.ru";
+
+        public string To
+        {
+            get => _To;
+
+            set
+            {
+                if (value.Contains("!")) throw new ArgumentException("!!!!");
+                else
+                    Set(ref _To, value);
+            }
+        }
+
+        private string _Group = "Group1";
+
+        public string Group
+        {
+            get => _Group;
+
+            set
+            {
+                Set(ref _Group, value);
             }
         }
         #endregion
@@ -88,5 +127,23 @@ namespace Utilites.ViewModels
         #endregion
         #endregion
 
+        public string this[string columnName]
+        {
+            get
+            {
+                System.Diagnostics.Debug.WriteLine("IDataError");
+                Error=String.Empty;
+                switch (columnName)
+                {
+                    case "Group":
+                        if (Group.Length == 0 || Group.Length > 10) Error = "Длина группы";
+                        break;
+                }
+
+                return Error;
+            }
+        }
+
+        public string Error { get; private set; }
     }
 }
