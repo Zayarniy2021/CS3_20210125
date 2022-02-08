@@ -18,6 +18,7 @@ namespace Utilites.ViewModels
         {
             MailSendCommand = new RelayCommand(OnMailSendCommandExecute, CanMailSendCommandExecute);
             CloseWindowCommand = new RelayCommand(OnCloseWindowCommandExecute, CanCloseWindowCommandExecute);
+            ClosingCommand = new RelayCommand(OnClosingCommandExecute, CanClosingCommandExecute);
         }
 
         #region Свойства
@@ -88,6 +89,19 @@ namespace Utilites.ViewModels
         #endregion
 
         #region Команды
+
+        #region Closing
+
+        public ICommand ClosingCommand { get; }
+
+        private void OnClosingCommandExecute(object o)
+        {
+            System.Diagnostics.Debug.WriteLine("Closing "+DateTime.Now);
+        }
+
+        private bool CanClosingCommandExecute(object p) => true;
+
+        #endregion
 
         #region Mail Send
 

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:lib="clr-namespace:UserConrols;assembly=UserConrols"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:viewmodel="clr-namespace:Utilites.ViewModels"
         xmlns:validationrules="clr-namespace:Utilites.ValidationRules"
         xmlns:local="clr-namespace:Utilites"
@@ -39,7 +40,18 @@
             <RowDefinition Height="39*"/>
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
-            <MenuItem Header="Файл"/>
+            <MenuItem Header="Файл">
+                <MenuItem Header="Exit">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                          <i:CallMethodAction MethodName="Close" 
+                                              TargetObject="{Binding 
+                              RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </MenuItem>
+            </MenuItem>
+            
             <MenuItem Header="Помощь"/>
         </Menu>
         <TabControl Grid.Row="1" x:Name="tabControl" TabStripPlacement="Right" SelectedIndex="1">
@@ -127,4 +139,14 @@
             </TabItem>
         </TabControl>
     </Grid>
+    
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding ClosingCommand}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Closed">
+            <i:InvokeCommandAction Command="{Binding ClosedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
 </Window>
