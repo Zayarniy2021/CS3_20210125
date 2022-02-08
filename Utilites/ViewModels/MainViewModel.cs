@@ -55,6 +55,7 @@ namespace Utilites.ViewModels
 
             set
             {
+                if (value.Length > 10) throw new ArgumentOutOfRangeException("Превышена длина строки");
                 Set(ref _From, value);
             }
         }
