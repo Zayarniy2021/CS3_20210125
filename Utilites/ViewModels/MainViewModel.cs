@@ -55,7 +55,7 @@ namespace Utilites.ViewModels
 
             set
             {
-                if (value.Length > 10) throw new ArgumentOutOfRangeException("Превышена длина строки");
+                //if (value.Length > 10) throw new ArgumentOutOfRangeException("Превышена длина строки");
                 Set(ref _From, value);
             }
         }
@@ -138,6 +138,9 @@ namespace Utilites.ViewModels
                 {
                     case "Group":
                         if (Group.Length == 0 || Group.Length > 10) Error = "Длина группы";
+                        break;
+                    case "From":
+                        if (From.Length > 10) Error = "Длина отправителя более 10";
                         break;
                 }
 
