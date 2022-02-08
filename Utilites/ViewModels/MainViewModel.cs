@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using Utilites.Commands;
@@ -110,7 +110,7 @@ namespace Utilites.ViewModels
         private void OnMailSendCommandExecute(object o)
         {
             //Обращение к бизнес логике по выполнению действия
-            Task.Run(
+            Thread thread=new Thread(
                 () =>
                 {
                     for (int i = 0; i < 10; i++)
@@ -120,6 +120,8 @@ namespace Utilites.ViewModels
                     }
                 }
             );
+
+            thread.Start();
         }
 
         private bool CanMailSendCommandExecute(object p) => true;
