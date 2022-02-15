@@ -1,29 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;//ObservibleCollection
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Media3D;
 using Utilites.Commands;
 using Utilites.ViewModels.Base;
+using Utilites.Models;
 
 namespace Utilites.ViewModels
 {
     class MainViewModel: ViewModel, IDataErrorInfo
     {
+        private Utilites.Models.AdressDB _dbContainer;
 
         public MainViewModel()
         {
             MailSendCommand = new RelayCommand(OnMailSendCommandExecute, CanMailSendCommandExecute);
             CloseWindowCommand = new RelayCommand(OnCloseWindowCommandExecute, CanCloseWindowCommandExecute);
             ClosingCommand = new RelayCommand(OnClosingCommandExecute, CanClosingCommandExecute);
+            AddAdressCommand = new RelayCommand(OnAddAdressCommandExecute, CanAddAdressCommandExecute);
+            RemoveAdressCommand = new RelayCommand(OnRemoveAdressCommandExecute, CanRemoveAdressCommandExecute);
+            _dbContainer = new AdressDB();
+            _dbContainer.Adresses.Load();
         }
 
         #region Свойства
 
         private string _FromSelectedItem;
+
+
+        public ObservableCollection<Adress> Adresses => _dbContainer.Adresses.Local;
 
         public string FromSelectedItem
         {
@@ -90,6 +102,37 @@ namespace Utilites.ViewModels
 
         #region Команды
 
+        #region Remove adress
+
+        public ICommand RemoveAdressCommand { get; }
+
+        private void OnRemoveAdressCommandExecute(object o)
+        {
+           // System.Diagnostics.Debug.WriteLine("Remove Adress " + o.ToString());
+            Adress adr = (o as Adress);
+            Adress adress = _dbContainer.Adresses.Where(a => a.AdressID == adr.AdressID).FirstOrDefault();
+            _dbContainer.Adresses.Remove(adress);
+            _dbContainer.SaveChanges();
+        }
+
+        private bool CanRemoveAdressCommandExecute(object p) => true;
+
+        #endregion
+
+        #region Add adress
+
+        public ICommand AddAdressCommand { get; }
+
+        private void OnAddAdressCommandExecute(object o)
+        {
+            //System.Diagnostics.Debug.WriteLine("AddAdress " + DateTime.Now);
+            _dbContainer.Adresses.Add(new Adress() {AdressName = o.ToString()});
+            _dbContainer.SaveChanges();
+        }
+
+        private bool CanAddAdressCommandExecute(object p) => true;
+
+        #endregion
         #region Closing
 
         public ICommand ClosingCommand { get; }
